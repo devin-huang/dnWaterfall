@@ -1,0 +1,144 @@
+$zero : 0%;
+$full :100% ;
+$half :50%;
+
+@mixin bgAndzIndex($z,$bg){
+  z-index : $z ;
+  background : $bg ;
+};
+
+*{
+  box-sizing:border-box;
+  margin: $zero;
+  padding: $zero;
+  list-style: none;
+}
+
+@keyframes myloading
+{
+  from {transform:rotate(0deg);}
+  to   {transform:rotate(360deg);}
+}
+
+@media screen and (min-width:1200px){
+    .dnWaterfall::before{
+      content:"4+col-dn-waterfall-4";
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+    .dnWaterfall::before{
+      content:"3+col-dn-waterfall-3";
+    }
+}
+ 
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .dnWaterfall::before{
+      content:"2+col-dn-waterfall-2";
+    }
+}
+
+@media only screen and (max-width: 767px){
+    .dnWaterfall::before{
+      content:"1+col-dn-waterfall-1";
+    }
+}
+
+.dnWaterfall-mask{
+  position: fixed;
+  width:$full;
+  height: $full;
+  @include bgAndzIndex(9,rgba(0,0,0,.5));
+  .dnWaterfall-box{
+    border:medium solid white;
+    box-shadow: 2px 2px 5px;
+    position: absolute;
+    cursor: pointer;
+    @include bgAndzIndex(9, black);
+    left:$half;
+    top:$half;
+    & > img {
+      width: $full;
+      vertical-align: bottom;
+    }
+  }
+}
+
+.dnWaterfall{
+    clear: both;
+    overflow: hidden;
+    max-width: 980px;
+    margin: 0px auto;
+  &::before{
+    position: absolute;
+    visibility: hidden;
+  }
+  .column{
+    float: left;
+    position: relative;
+    padding-right: 15px; 
+    padding-left : 15px;   
+  }
+  @for $i from 1 through 4 {
+    .col-dn-waterfall-#{$i} { width: 100% / $i; }
+  }
+
+  .waterfall-area{
+    margin-top: 15px;
+    cursor: pointer;
+    position: relative;
+    &.done:hover::before{
+      content: '';
+      display: block;
+      position: absolute;
+      left:0%;
+      top:0%;
+      width:100%;
+      height: 100%;
+      @include bgAndzIndex(0,rgba(0,0,0,.3));
+    }
+    .waterfall-pic{
+      width:$full;
+      vertical-align: middle;
+      border:thin solid #ccc;
+      &.hidden{
+        visibility: hidden;
+      }
+    }
+    .waterfall-link.loaded{
+      display: block;
+      position: relative;
+      height: auto;
+      @include bgAndzIndex(-2,#ccc);
+      &::before{
+        content: "";
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top:$half;
+        left:$half;
+        margin-left: -20px;
+        margin-top: -20px;
+        display: block;
+        @include bgAndzIndex(-1,url("../images/loading.svg"));
+        background-repeat: no-repeat;
+        background-position: center;
+        animation:myloading 2s linear infinite;
+      }
+      &::after{
+        content: "Loading";
+        width: 60px;
+        height: 20px;
+        top:$half;
+        left:$half;
+        position: absolute;
+        margin-left: -30px;
+        margin-top: 25px;
+        display: block;
+        z-index: -1;
+        color:#666;
+        font-weight: bold;
+      }
+    }
+  }
+}
