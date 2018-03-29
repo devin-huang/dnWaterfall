@@ -45,10 +45,7 @@
           self.showIMG()
         });
 
-        $(this.container.find(".waterfall-area")).on("click",function(){
-          let src = $(this).find('img.waterfall-pic').attr('src');
-          self.slide(src);
-        });
+
 
         return this ;
     };
@@ -69,7 +66,8 @@
             this.createDom();
             this.getImgItems();
             this.setImgArrs();
-            this.deleteDefaultImgDOM()
+            this.deleteDefaultImgDOM();
+            this.clickToMask();
         },
         getBeforeContent : function(){
           let _this_ = this ;
@@ -138,6 +136,13 @@
             }, index * 5);   
           })      
         },
+        clickToMask:function(){
+          let _this_ = this ;
+          $(this.container.find(".waterfall-area")).on("click",function(){
+            let src = $(this).find('img.waterfall-pic').attr('src');
+            _this_.slide(src);
+          });
+        },
         createDom : function(){
           let _this_ = this , 
               html   = '<div class="column '+ this.attrVal[1] +'"></div>';
@@ -153,8 +158,9 @@
         },
         slide : function(imgSrc){
           let mask  =  $('<div class="dnWaterfall-mask" />') ,
-              box   =  $('<div class="dnWaterfall-box" />') ;
-          this.column.parents('body').prepend(mask).find(mask).prepend(box);
+              box   =  $('<div class="dnWaterfall-box" />') ,
+              close =  $('<div class="close" />') ;
+          this.column.parents('body').prepend(mask).find(mask).prepend(box).find(box).prepend(close);
 
           let imgObj = new Image() ;
           $(imgObj).on('load error', function(){

@@ -61,6 +61,26 @@ $half :50%;
       width: $full;
       vertical-align: bottom;
     }
+    .close{
+      position: absolute;
+      top:-4px;
+      right:-39px;
+      width:35px;
+      height: 35px;
+      border-radius: 0px 5px 5px 0px;
+      @include bgAndzIndex(1,black);
+      &::before{
+        content: '';
+        display: block;
+        position: absolute;
+        right: 0;
+        top:0;
+        width: $full ;
+        height: $full ;
+        @include bgAndzIndex(1,url('../images/close.svg'));
+        background-repeat: no-repeat;
+      }
+    }
   }
 }
 

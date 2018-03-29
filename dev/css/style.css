@@ -1,29 +1,15 @@
 * {
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   margin: 0%;
   padding: 0%;
   list-style: none;
 }
 
-@-webkit-keyframes myloading {
-  from {
-    -webkit-transform: rotate(0deg);
-    transform: rotate(0deg);
-  }
-  to {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes myloading {
   from {
-    -webkit-transform: rotate(0deg);
     transform: rotate(0deg);
   }
   to {
-    -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
 }
@@ -56,7 +42,6 @@
 }
 .dnWaterfall-mask .dnWaterfall-box {
   border: medium solid white;
-  -webkit-box-shadow: 2px 2px 5px;
   box-shadow: 2px 2px 5px;
   position: absolute;
   cursor: pointer;
@@ -68,6 +53,28 @@
 .dnWaterfall-mask .dnWaterfall-box > img {
   width: 100%;
   vertical-align: bottom;
+}
+.dnWaterfall-mask .dnWaterfall-box .close {
+  position: absolute;
+  top: -4px;
+  right: -39px;
+  width: 35px;
+  height: 35px;
+  border-radius: 0px 5px 5px 0px;
+  z-index: 1;
+  background: black;
+}
+.dnWaterfall-mask .dnWaterfall-box .close::before {
+  content: '';
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background: url("../images/close.svg");
+  background-repeat: no-repeat;
 }
 
 .dnWaterfall {
@@ -143,7 +150,6 @@
   background: url("../images/loading.svg");
   background-repeat: no-repeat;
   background-position: center;
-  -webkit-animation: myloading 2s linear infinite;
   animation: myloading 2s linear infinite;
 }
 .dnWaterfall .waterfall-area .waterfall-link.loaded::after {
